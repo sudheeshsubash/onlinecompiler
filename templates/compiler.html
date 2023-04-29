@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Online Compiler</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+      /* Set up the main container */
+      .container {
+        display: flex;
+        flex-direction: column;
+        height: 100vh;
+      }
+      
+      /* Set up the header */
+      .header {
+        background-color: #333;
+        color: white;
+        padding: 10px;
+        text-align: center;
+        font-size: 1.5rem;
+      }
+      
+      /* Set up the main section */
+      .main {
+        flex: 1;
+        display: flex;
+        flex-direction: row;
+        justify-content: center;
+        align-items: center;
+      }
+      
+      /* Set up the text editor */
+      .editor {
+        width: 60%;
+        height: 450px;
+        border: 1px solid #333;
+        padding: 10px;
+        margin: 20px;
+        font-size: 1rem;
+        resize: none;
+      }
+      
+      /* Set up the button */
+      .run-btn {
+        background-color: #4CAF50;
+        color: white;
+        padding: 10px 20px;
+        border: none;
+        cursor: pointer;
+        font-size: 1rem;
+        margin-top: 20px;
+        border-radius: 5px;
+      }
+      
+      /* Set up the output section */
+      .output {
+        width: 40%;
+        height: 450px;
+        border: 1px solid #333;
+        padding: 10px;
+        margin: 20px;
+        overflow-y: auto;
+      }
+      
+      /* Set up the footer */
+      .footer {
+        background-color: #333;
+        color: white;
+        padding: 10px;
+        text-align: center;
+        font-size: 0.8rem;
+      }
+      
+      /* Set up responsive styles */
+      @media only screen and (max-width: 600px) {
+        .editor {
+          width: 90%;
+        }
+        
+        .output {
+          width: 90%;
+        }
+        
+        .run-btn {
+          font-size: 0.8rem;
+        }
+      }
+    </style>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
+  </head>
+  <body>
+    <div class="container">
+      <div class="header">
+        <h1>Online Compiler</h1>
+      </div>
+      <div class="main">
+        <textarea class="editor" id="editor" placeholder="Enter your code here..."></textarea>
+        <div class="output" id='output'></div>
+      </div>
+      <button type="button" class="run-btn" onclick="compilercode()">Run</button>
+      <div class="footer">
+        <p>&copy; 2023 Online Compiler. All rights reserved. created by : sudheesh</p>
+      </div>
+    </div>
+    <script>
+      function compilercode(){
+        var code = document.getElementById('editor').value
+        console.log(code)
+        $.ajax({
+          url: 'execute/',
+          method: 'GET',
+          data: {user_enter_code : code},
+          success: function(data) {
+            document.getElementById('output').innerHTML = data.output
+          },
+      });
+    }
+  </script>
+  </body>
+</html>
